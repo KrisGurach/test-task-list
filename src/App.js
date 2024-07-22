@@ -66,6 +66,10 @@ const App = () => {
               <p className="list-text">{task.description}</p>
               <p className="list-text list-text_data">Срок: {task.deadline}</p>
             </span>
+            <div>
+              <button className="button-edit"></button>
+              <button className="button-delete"></button>
+            </div>
           </li>
         ))}
       </ul>
