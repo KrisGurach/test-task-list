@@ -16,6 +16,12 @@ const App = () => {
     setTasks(updatedTasks);
   }
 
+  const updateForm = (task) => {
+    setTitle(task?.title ? task.title : "");
+    setDescription(task?.description ? task.description : "");
+    setDeadline(task?.deadline ? task.deadline : "");
+  } 
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -32,13 +38,7 @@ const App = () => {
       updatedTasks = [...tasks, { title, description, deadline }];
     }
     updateTasks(updatedTasks);
-    clearForm();
-  };
-
-  const clearForm = () => {
-    setTitle('');
-    setDescription('');
-    setDeadline('');
+    updateForm();
   };
 
   const handleDelete = (index) => {
@@ -47,13 +47,9 @@ const App = () => {
   }
 
   const handleEdit = (index) => {
-    const currentTask = tasks[index];
-
-    setTitle(currentTask.title);
-    setDescription(currentTask.description);
-    setDeadline(currentTask.deadline);
+    updateForm(tasks[index]);
     setEditIndex(index);
-  }
+  };
 
   return (
     <div className="container">
