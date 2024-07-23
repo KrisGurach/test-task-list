@@ -10,6 +10,7 @@ const App = () => {
   const [description, setDescription] = useState(''); 
   const [deadline, setDeadline] = useState(''); 
   const [editIndex, setEditIndex] = useState(null);
+  const [removingIndex, setRemovingIndex] = useState(null);
   const [tasks, setTasks] = useState(storedTasks ? storedTasks : []);
   const inputRef = useRef(null);
 
@@ -44,8 +45,13 @@ const App = () => {
   };
 
   const handleDelete = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    updateTasks(updatedTasks);
+    setRemovingIndex(index);
+
+    setTimeout(() => {
+      const updatedTasks = tasks.filter((_, i) => i !== index);
+      setRemovingIndex(null);
+      updateTasks(updatedTasks);
+    }, 300);
   }
 
   const handleEdit = (index) => {
@@ -118,6 +124,7 @@ const App = () => {
       <ul className="task-list">
         {tasks.map((task, index) => {
           return <Task
+            removingIndex={removingIndex}
             key={index}
             task={task} 
             index={index}

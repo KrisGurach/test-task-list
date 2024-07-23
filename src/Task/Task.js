@@ -1,12 +1,12 @@
 import "./Task.css";
 
-const Task = ({task, index, handleComplete, handleEdit, handleDelete}) => {
+const Task = ({removingIndex, task, index, handleComplete, handleEdit, handleDelete}) => {
   return (
-    <li key={index} className="task">
+    <li key={index} className={`task ${removingIndex === index ? 'task-leave' : ''}`}>
       <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
-        <p className="list-text list-text_bold">{task.title}</p>
-        <p className="list-text">{task.description}</p>
-        <p className="list-text list-text_data">Срок: {task.deadline}</p>
+        <p className="task-text list-text_bold">{task.title}</p>
+        <p className="task-text">{task.description}</p>
+        <p className="task-text task-text_data">Срок: {task.deadline}</p>
       </span>
       <div>
         <button
