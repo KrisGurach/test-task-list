@@ -58,7 +58,6 @@ const App = () => {
       i === index ? { ...task, completed: !task.completed } : task
     );
     updateTasks(updatedTasks);
-    console.log("n");
   };
 
   const handleSortByDate = () => {
@@ -104,15 +103,12 @@ const App = () => {
         </button>
       </form>
       
-      {/* <button className="button-main button-sort" onClick={handleSortByDate}>Все</button>
-      <button className="button-main button-sort" onClick={handleSortByDate}>Завершенные</button>
-      <button className="button-main button-sort" onClick={handleSortByDate}>Незавершенные</button> */}
 
-      <button className="button-sort" onClick={handleSortByCompletion}>
-        Сортировать по завершенности
+      <button className="button-main button-sort" onClick={handleSortByCompletion}>
+        Сортировать по статусу
       </button>
 
-      <button className="button-main button-sort-date" onClick={handleSortByDate}>
+      <button className="button-main button-sort" onClick={handleSortByDate}>
         Сортировать по дате
       </button>
 
@@ -125,7 +121,7 @@ const App = () => {
               <p className="list-text list-text_data">Срок: {task.deadline}</p>
             </span>
             <div>
-              <button className="button-complete" onClick={() => handleComplete(index)}>
+              <button className="button-main button-complete" onClick={() => handleComplete(index)}>
                {task.completed ? "Восстановить" : "Завершить"}
               </button>  
               <button className="button-edit" onClick={() => handleEdit(index)}></button>
