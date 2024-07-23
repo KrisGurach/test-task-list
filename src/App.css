@@ -44,7 +44,7 @@
   color: rgba(2, 99, 42, 0.453);
 }
 
-.button-save {
+.button-main {
   align-self: center;
   width: 150px;
   padding: 10px;
@@ -55,8 +55,18 @@
   cursor: pointer;
 }
 
-.button-save:hover {
+.button-main:hover {
   background-color:  rgb(10, 151, 73);
+}
+
+.button-sort {
+  margin-right: 15px;
+  width: 120px;
+}
+
+.button-sort-date {
+  margin-left: 35px;
+  width: 160px;
 }
 
 .task-list {

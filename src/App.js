@@ -36,7 +36,7 @@ const App = () => {
       setEditIndex(null);
     } else {
       // добавляем новую задачу
-      updatedTasks = [...tasks, { title, description, deadline }];
+      updatedTasks = [...tasks, { title, description, deadline, completed: false }];
     }
     updateTasks(updatedTasks);
     updateForm();
@@ -51,6 +51,25 @@ const App = () => {
     inputRef.current.focus();
     updateForm(tasks[index]);
     setEditIndex(index);
+  };
+
+  const handleComplete = (index) => {
+    const updatedTasks = tasks.map((task, i) =>
+      i === index ? { ...task, completed: !task.completed } : task
+    );
+    updateTasks(updatedTasks);
+    console.log("n");
+  };
+
+  const handleSortByDate = () => {
+    const sortedTasks = [...tasks].sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+    updateTasks(sortedTasks);
+  };
+
+  const handleSortByCompletion = () => {
+    const sortedTasks = [...tasks].sort((a, b) => a.completed - b.completed);
+    updateTasks(sortedTasks);
+    console.log(sortedTasks);
   };
 
   return (
@@ -80,19 +99,35 @@ const App = () => {
           onChange={(e) => setDeadline(e.target.value)}
           required
         />
-        <button className="button-save" type="submit">
+        <button className="button-main button-save" type="submit">
           {editIndex !== null ? "Сохранить" : "Добавить задачу"}
         </button>
       </form>
+      
+      {/* <button className="button-main button-sort" onClick={handleSortByDate}>Все</button>
+      <button className="button-main button-sort" onClick={handleSortByDate}>Завершенные</button>
+      <button className="button-main button-sort" onClick={handleSortByDate}>Незавершенные</button> */}
+
+      <button className="button-sort" onClick={handleSortByCompletion}>
+        Сортировать по завершенности
+      </button>
+
+      <button className="button-main button-sort-date" onClick={handleSortByDate}>
+        Сортировать по дате
+      </button>
+
       <ul className="task-list">
         {tasks.map((task, index) => (
           <li key={index} className="task">
-            <span>
+            <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
               <p className="list-text list-text_bold">{task.title}</p>
               <p className="list-text">{task.description}</p>
               <p className="list-text list-text_data">Срок: {task.deadline}</p>
             </span>
             <div>
+              <button className="button-complete" onClick={() => handleComplete(index)}>
+               {task.completed ? "Восстановить" : "Завершить"}
+              </button>  
               <button className="button-edit" onClick={() => handleEdit(index)}></button>
               <button className="button-delete" onClick={() => handleDelete(index)}></button>
             </div>
