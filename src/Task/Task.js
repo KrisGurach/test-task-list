@@ -3,9 +3,7 @@ import "./Task.css";
 const Task = ({task, index, handleComplete, handleEdit, handleDelete}) => {
   return (
     <li key={index} className="task">
-      <span
-        style={{ textDecoration: task.completed ? "line-through" : "none" }}
-      >
+      <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
         <p className="list-text list-text_bold">{task.title}</p>
         <p className="list-text">{task.description}</p>
         <p className="list-text list-text_data">Срок: {task.deadline}</p>
@@ -23,7 +21,7 @@ const Task = ({task, index, handleComplete, handleEdit, handleDelete}) => {
         ></button>
         <button
           className="button-delete"
-          onClick={() => handleDelete()}
+          onClick={() => handleDelete(index)}
         ></button>
       </div>
     </li>

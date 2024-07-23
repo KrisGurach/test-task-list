@@ -55,6 +55,10 @@
   cursor: pointer;
 }
 
+.button-main:active {
+  transform: scale(0.9);
+}
+
 .button-main:hover {
   background-color:  rgb(10, 151, 73);
 }
