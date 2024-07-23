@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./App.css";
+import Task from "../Task/Task";
 
 const App = () => {
   const taskStorageKey = "storedTasks";
@@ -102,9 +103,11 @@ const App = () => {
           {editIndex !== null ? "Сохранить" : "Добавить задачу"}
         </button>
       </form>
-      
 
-      <button className="button-main button-sort" onClick={handleSortByCompletion}>
+      <button
+        className="button-main button-sort"
+        onClick={handleSortByCompletion}
+      >
         Сортировать по статусу
       </button>
 
@@ -113,22 +116,15 @@ const App = () => {
       </button>
 
       <ul className="task-list">
-        {tasks.map((task, index) => (
-          <li key={index} className="task">
-            <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
-              <p className="list-text list-text_bold">{task.title}</p>
-              <p className="list-text">{task.description}</p>
-              <p className="list-text list-text_data">Срок: {task.deadline}</p>
-            </span>
-            <div>
-              <button className="button-main button-complete" onClick={() => handleComplete(index)}>
-               {task.completed ? "Восстановить" : "Завершить"}
-              </button>  
-              <button className="button-edit" onClick={() => handleEdit(index)}></button>
-              <button className="button-delete" onClick={() => handleDelete(index)}></button>
-            </div>
-          </li>
-        ))}
+        {tasks.map((task, index) => {
+          return <Task
+            key={index}
+            task={task} 
+            index={index}
+            handleComplete={handleComplete}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete} />;
+        })}
       </ul>
     </div>
   );
