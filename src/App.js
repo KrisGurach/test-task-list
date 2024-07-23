@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
   const [deadline, setDeadline] = useState(''); 
   const [editIndex, setEditIndex] = useState(null);
   const [tasks, setTasks] = useState(storedTasks ? storedTasks : []);
+  const inputRef = useRef(null);
 
   const updateTasks = (updatedTasks) => {
     localStorage.setItem(taskStorageKey, JSON.stringify(updatedTasks));
@@ -47,6 +48,7 @@ const App = () => {
   }
 
   const handleEdit = (index) => {
+    inputRef.current.focus();
     updateForm(tasks[index]);
     setEditIndex(index);
   };
@@ -59,6 +61,7 @@ const App = () => {
           className="input"
           type="text"
           placeholder="Заголовок"
+          ref={inputRef}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
